@@ -2,23 +2,23 @@
 <1>com.zhihaoliang.util.ui.UIUtil
 <pre><code>
 /**
- * 测量View的高度
+ \* 测量View的高度
  */
 public static int measureViewHeight(View paramView)
 /**
- * 测量View的宽度
+ \* 测量View的宽度
  */
 public static int measureViewWidth(View paramView)
 /**
- * 显示Toast
+ \* 显示Toast
  */
 public static void showToast(Context context, String text)
 /**
- * 显示Toast
+ \* 显示Toast
  */
 public static void showToast(Context context, int textId) 
 /**
- * 设置文本的格式
+ \* 设置文本的格式
  */
 public static CharSequence getStyledString(Context context ,String[] text ,int[] styles ) 
 
@@ -26,19 +26,19 @@ public static CharSequence getStyledString(Context context ,String[] text ,int[]
 <2>  com.zhihaoliang.util.ui.Log
 <pre><code>
 /**
- * 打印对象
+ \* 打印对象
  */
 public static void log(Object... args)
 /**
- * 打印对象
+ \* 打印对象
  */
 public static void logObject(Object object) 
 /**
- * 打印对象到同一行
+ \* 打印对象到同一行
  */
 public static void logObjectLine(Object object)
 /**
- * 打印对象到sdcard
+ \* 打印对象到sdcard
  */
 public static void LogFile(String scanResult)
 
