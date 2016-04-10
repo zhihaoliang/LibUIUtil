@@ -21,6 +21,9 @@ import android.widget.Toast;
  */
 public class UIUtil {
 
+    /**
+     * 测量View的高度
+     */
     public static int measureViewHeight(View paramView) {
         ViewGroup.LayoutParams p = paramView.getLayoutParams();
         if (p == null) {
@@ -41,7 +44,9 @@ public class UIUtil {
         paramView.measure(childWidthSpec, childHeightSpec);
         return paramView.getMeasuredHeight();
     }
-
+    /**
+     * 测量View的宽度
+     */
     public static int measureViewWidth(View paramView) {
         ViewGroup.LayoutParams p = paramView.getLayoutParams();
         if (p == null) {
@@ -62,7 +67,9 @@ public class UIUtil {
         paramView.measure(childWidthSpec, childHeightSpec);
         return paramView.getMeasuredWidth();
     }
-
+    /**
+     * 显示Toast
+     */
     public static void showToast(Context context, String text) {
         View localView = LayoutInflater.from(context).inflate(
                R.layout.common_toast, null);
@@ -73,7 +80,9 @@ public class UIUtil {
         localToast.setDuration(Toast.LENGTH_SHORT);
         localToast.show();
     }
-
+    /**
+     * 显示Toast
+     */
     public static void showToast(Context context, int textId) {
         View localView = LayoutInflater.from(context).inflate(
                 R.layout.common_toast, null);
@@ -85,27 +94,9 @@ public class UIUtil {
         localToast.show();
     }
 
-    public static View getFragmentView(Activity activity, WebView webView, WebViewClient client,String url) {
-        // 支持缩放
-        webView.getSettings().setSupportMultipleWindows(true);
-        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setAllowFileAccess(true);// 可以读取文件缓存(manifest生效)
-        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        webView.getSettings().setUseWideViewPort(true);
-        webView.getSettings().setLoadWithOverviewMode(true);
-        // webView.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
-       /* if (activity.getScreenWidth() == 480) {
-            webView.setInitialScale(15);
-        }*/
-
-        webView.setWebViewClient(client);
-        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        webView.loadUrl(url);
-        return webView;
-    }
-
-
+    /**
+     * 设置文本的格式
+     */
     public static CharSequence getStyledString(Context context ,String[] text ,int[] styles ) {
         SpannableStringBuilder builder = new SpannableStringBuilder();
         for (int i = 0;i<text.length;i++){

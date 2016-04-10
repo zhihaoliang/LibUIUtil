@@ -16,13 +16,10 @@ import org.json.JSONException;
 import android.os.Environment;
 
 public class Log {
-
-    public static final boolean DEBUG = false;
-
+    /**
+     * 打印对象
+     */
     public static void log(Object... args) {
-        if(!DEBUG){
-            return;
-        }
         if (args == null || args.length == 0) {
             return;
         }
@@ -35,11 +32,10 @@ public class Log {
 
         android.util.Log.e("----", stringBuilder.toString());
     }
-
+    /**
+     * 打印对象
+     */
     public static void logObject(Object object) {
-        if(!DEBUG){
-            return;
-        }
         if (object == null) {
             android.util.Log.e("----", "null");
         }
@@ -55,11 +51,10 @@ public class Log {
         }
 
     }
-
+    /**
+     * 打印对象到同一行
+     */
     public static void logObjectLine(Object object) {
-        if(!DEBUG){
-            return;
-        }
         if (object == null) {
             android.util.Log.e("----", "null");
         }
@@ -75,6 +70,35 @@ public class Log {
         }
 
     }
+
+    /**
+     * 打印对象到sdcard
+     */
+    public static void LogFile(String scanResult) {
+        String sdCard = getSdCard();
+        File result = new File(sdCard + "/resultCode.txt");
+        if (result.exists()) {
+            if (result.isDirectory()) {
+                return;
+            }
+        } else {
+            try {
+                if (!result.createNewFile()) {
+                    return;
+                }
+            } catch (IOException e) {
+                return;
+            }
+        }
+        try {
+            PrintStream pr = new PrintStream(new BufferedOutputStream(new FileOutputStream(result,
+                    true)));
+            pr.println(scanResult);
+            pr.close();
+        } catch (IOException e) {
+        }
+    }
+
 
     private static void wrapJsonLine(Object object) throws JSONException,
             IllegalArgumentException, IllegalAccessException {
@@ -145,33 +169,6 @@ public class Log {
         return false;
     }
 
-    public static void LogFile(String scanResult) {
-        if(!DEBUG){
-            return;
-        }
-        String sdCard = getSdCard();
-        File result = new File(sdCard + "/resultCode.txt");
-        if (result.exists()) {
-            if (result.isDirectory()) {
-                return;
-            }
-        } else {
-            try {
-                if (!result.createNewFile()) {
-                    return;
-                }
-            } catch (IOException e) {
-                return;
-            }
-        }
-        try {
-            PrintStream pr = new PrintStream(new BufferedOutputStream(new FileOutputStream(result,
-                    true)));
-            pr.println(scanResult);
-            pr.close();
-        } catch (IOException e) {
-        }
-    }
 
     private static String getSdCard() {
         String sdCardState = Environment.getExternalStorageState();
