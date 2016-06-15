@@ -3,6 +3,7 @@ package com.zhihaoliang.util.ui.zuisimple;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.zhihaoliang.util.ui.Log;
 import com.zhihaoliang.util.ui.UIUtil;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,5 +14,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         UIUtil.showToast(this,"qww");
+
+        Log.log("========");
+        Log.LogFile("===");
+        Log.logObject("==");
+        Log.logObjectLine("===");
     }
 }
