@@ -58,4 +58,4 @@ repositories {
 }
 </pre></code>
 在app中的build.gradle 加入<br>
- compile 'com.zhihaoliang.util.ui:libui:1.0'
+ compile 'com.zhihaoliang.util.ui:libui:1.1'
