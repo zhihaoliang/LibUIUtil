@@ -15,11 +15,13 @@ import org.json.JSONException;
 
 import android.os.Environment;
 
+import com.google.gson.Gson;
+
 public class Log {
     /**
      * 打印对象
      */
-    public static void log(Object... args) {
+    public static void log(Object objectInfo,Object... args) {
         if (args == null || args.length == 0) {
             return;
         }
@@ -30,18 +32,18 @@ public class Log {
             stringBuilder.append(args[i]);
         }
 
-        android.util.Log.e("----", stringBuilder.toString());
+        android.util.Log.e(objectInfo.getClass().getName()+ " : ", stringBuilder.toString());
     }
     /**
      * 打印对象
      */
-    public static void logObject(Object object) {
+    public static void logObject(Object objectInfo,Object object) {
         if (object == null) {
-            android.util.Log.e("----", "null");
+            android.util.Log.e(objectInfo.getClass().getName()+ " : ", "null");
         }
 
         try {
-            wrapJson(object);
+            wrapJson(objectInfo,object);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -54,13 +56,13 @@ public class Log {
     /**
      * 打印对象到同一行
      */
-    public static void logObjectLine(Object object) {
+    public static void logObjectLine(Object objectInfo,Object object) {
         if (object == null) {
-            android.util.Log.e("----", "null");
+            android.util.Log.e(objectInfo.getClass().getName()+ " : ", "null");
         }
 
         try {
-            wrapJsonLine(object);
+            wrapJsonLine(objectInfo,object);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -99,8 +101,17 @@ public class Log {
         }
     }
 
+    public static void LogGson(Object objectInfo,Object object) {
+        if (object == null) {
+            android.util.Log.e(objectInfo.getClass().getName()+ " : ", "null");
+        }
 
-    private static void wrapJsonLine(Object object) throws JSONException,
+        Gson gson = new Gson();
+        String infor = gson.toJson(object);
+        android.util.Log.e(objectInfo.getClass().getName()+ " : ", infor);
+    }
+
+    private static void wrapJsonLine(Object objectInfo,Object object) throws JSONException,
             IllegalArgumentException, IllegalAccessException {
         final Field[] fields = object.getClass().getDeclaredFields();
         AccessController.doPrivileged(new PrivilegedAction<Void>() {
@@ -121,11 +132,11 @@ public class Log {
             }
 
         }
-        android.util.Log.e("----", stringBuffer.toString());
+        android.util.Log.e(objectInfo.getClass().getName()+ " : ", stringBuffer.toString());
 
     }
 
-    private static void wrapJson(Object object) throws JSONException,
+    private static void wrapJson(Object objectInfo,Object object) throws JSONException,
             IllegalArgumentException, IllegalAccessException {
         final Field[] fields = object.getClass().getDeclaredFields();
         AccessController.doPrivileged(new PrivilegedAction<Void>() {
@@ -139,7 +150,7 @@ public class Log {
             if (isSimpleType(type)) {
                 Object obj = field.get(object);
                 String name = field.getName();
-                android.util.Log.e("----", name + " : " + obj);
+                android.util.Log.e(objectInfo.getClass().getName()+ " : ", name + " : " + obj);
             }
 
         }
